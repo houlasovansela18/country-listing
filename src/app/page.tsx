@@ -1,7 +1,7 @@
-import { columns, Payment } from "@/components/columns";
+import { columns, Country } from "@/components/columns";
 import { DataTable } from "@/components/country-table";
 
-async function getData(): Promise<Payment[]> {
+async function getData(): Promise<Country[]> {
     const res = await fetch(
         "https://restcountries.com/v3.1/all?fields=name,flags,cca2,cca3,altSpellings,idd",
         {
@@ -17,7 +17,7 @@ async function getData(): Promise<Payment[]> {
             flags: data.flags.png,
             name: data.name.official,
             cca2: data.cca2,
-            cca3: data.cca2,
+            cca3: data.cca3,
             nativeName: nativeNameObj ? nativeNameObj.official : "",
             idd: `${data.idd.root}, ${data.idd.suffixes[0]}`,
             altSpellings: data.altSpellings,

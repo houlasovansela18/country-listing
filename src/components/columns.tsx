@@ -3,10 +3,12 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "./ui/button";
 import { ArrowUpDown } from "lucide-react";
+import { DialogTrigger } from "./ui/dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Payment = {
+export type Country = {
     flags: string;
     name: string;
     cca2: string;
@@ -16,10 +18,16 @@ export type Payment = {
     altSpellings: string[];
 };
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Country>[] = [
     {
         accessorKey: "flags",
         header: "Flag",
+        cell: ({ row }) => (
+            <Avatar>
+                <AvatarImage src={row.original.flags} />
+                <AvatarFallback>{row.original.cca2}</AvatarFallback>
+            </Avatar>
+        ),
     },
     {
         accessorKey: "name",
@@ -36,6 +44,11 @@ export const columns: ColumnDef<Payment>[] = [
                 </Button>
             );
         },
+        cell: ({ row }) => (
+            <DialogTrigger asChild>
+                <Button variant="ghost">{row.original.name}</Button>
+            </DialogTrigger>
+        ),
         enableSorting: true,
     },
     {
