@@ -3,7 +3,10 @@ import { DataTable } from "@/components/country-table";
 
 async function getData(): Promise<Payment[]> {
     const res = await fetch(
-        "https://restcountries.com/v3.1/all?fields=name,flags,cca2,cca3,altSpellings,idd"
+        "https://restcountries.com/v3.1/all?fields=name,flags,cca2,cca3,altSpellings,idd",
+        {
+            cache: "force-cache",
+        }
     );
     const data = await res.json();
     return data.map((data: any) => {
